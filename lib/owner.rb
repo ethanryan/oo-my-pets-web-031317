@@ -14,7 +14,7 @@ class Owner
   def initialize(species)
     #super() #parentheses are indicating super is being called with no argument
     @species = species
-    #@owner = owner
+    #@owner = owner #reader/writer methods are created above, don't need anything here
     #@name = name
     #@mood = mood
     @pets = {fishes: [], dogs: [], cats: []}
@@ -55,7 +55,7 @@ class Owner
   #expect(owner.pets[:fishes][0].name).to eq("Bubbles")
   def buy_fish(fish)
     fish = Fish.new(fish)
-    pets[:fishes] << fish
+    pets[:fishes] << fish #push each fish instance into the value of the pets hash with the [:fishes] key
   end
 
   def buy_cat(cat)
@@ -77,7 +77,6 @@ class Owner
   # end
 
   def walk_dogs
-    #binding.pry
     self.pets[:dogs][0].mood = "happy" #[0] means just first dog
   end
 
@@ -86,7 +85,6 @@ class Owner
   end
 
   def feed_fish
-    #binding.pry
     self.pets[:fishes][0].mood = "happy" #[0] means just first fish
   end
 
@@ -95,20 +93,13 @@ class Owner
   # end
 
   def sell_pets
-    #binding.pry
-    #mood = self.pets.values[0][0].mood = "nervous"
-    pets.each do |species, pet_array|
-      #self.pets.reset_all
-      pet_array.each do |pet_object|
+    pets.each do |species, pet_array| #enumerate through pets hash...
+      pet_array.each do |pet_object|  #then enumerate through pet_array within pets hash...
         #binding.pry
-        pet_object.mood = "nervous"
-
-      # self.pets[:dogs][0].mood = "nervous"
-      # self.pets[:cats][0].mood = "nervous"
-      # self.pets[:fishes][0].mood = "nervous"
-    end
+        pet_object.mood = "nervous" #set each pet_object's mood to "nervous"
+      end
     end #end loop
-    self.pets.clear
+    self.pets.clear #and reset Owner instance .pets to an empty array, that is returned
   end
 
   def list_pets
